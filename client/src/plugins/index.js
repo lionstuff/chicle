@@ -1,0 +1,2 @@
+import './compositionAPI';
+import './vuetify';
