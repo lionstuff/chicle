@@ -5,7 +5,6 @@
         dark
         fixed
         floating
-        :src='`https://picsum.photos/800/600?random`'
         clipped-left
         :fade-img-on-scroll='true'
         :short='true'
@@ -13,8 +12,18 @@
         scroll-threshold='350'
         :tile='false'
         :dense='false'
-        class='elevation-5 text-uppercase body-2'
+        class='elevation-5 text-uppercase body-2 ma-1'
       >
+        <template #img>
+          <v-img
+            :src='`https://picsum.photos/800/600?random=2`'
+            :lazy-src='`https://picsum.photos/800/600?random=2`'
+            style='object-fit: cover;'
+            width='100vw'
+            min-width='100vw'
+          />
+        </template>
+
         <!-- <v-app-bar-nav-icon/> -->
 
         <div>{{ hover ? 'Войти' : 'Chicle' }}</div>

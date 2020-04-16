@@ -1,12 +1,10 @@
 <template>
   <v-hover #default='{ hover }'>
     <v-card
-      app
-      class='my-4'
+      class='ma-0'
       dark
       flat
       max-height='320'
-      outlined
       tile
       width='220'
     >
@@ -57,13 +55,13 @@
 
             <v-row
               v-else
-              class='mx-auto ma-0'
+              class='ma-0 pa-0 d-flex justify-space-between'
             >
               <!-- BEGIN Card Info section -->
 
                 <!-- BEGIN Gift Block -->
                   <v-col
-                    class='d-flex justify-start ma-0 mx-auto pa-0 ml-2'
+                    class='ma-0 pa-1'
                   >
                     <v-btn text large icon class='success'>
                       <v-icon color='white'>mdi-gift</v-icon>
@@ -72,19 +70,9 @@
                 <!-- END Gift Block -->
                 <!-- BEGIN Sale Block -->
                   <v-col
-                    class='d-flex justify-end ma-0 pa-0'
+                    class='ma-0 pa-0'
                   >
-                    <v-btn x-large text color='yellow'>
-                      <v-icon
-                        v-for='(number, i) in `2${Math.floor(Math.random() * 1e1)}`.split(``)'
-                        :key='`saleCostNumber${i}`'
-                        left
-                        large
-                      >
-                        mdi-numeric-{{ number }}
-                      </v-icon>
-                      <v-icon large right>mdi-sale</v-icon>
-                    </v-btn>
+                    <base-sale-block :props='{ ...price }'/>
                   </v-col>
                 <!-- END Sale Block -->
 
@@ -95,11 +83,11 @@
 
           <v-card-actions class='ma-0 mx-auto pa-0'>
             <v-btn normal block color='primary' clas='ma-0 mx-auto pa-0 d-flex align-center justify-center'>
-              <v-col class='ma-0 pa-0 text--secondary font-weight-light' style='text-decoration: line-through;'>
-                {{ price }} {{ currency }}
+              <v-col class='ma-0 pa-0 text--disabled font-weight-thin' style='text-decoration: line-through;'>
+                {{ price.old }} {{ currency }}
               </v-col>
               <v-col class='ma-0 pa-0'>
-                {{ (price - Math.floor(Math.random() * `1e${(price.split('.')[0].length - 1)}`)).toFixed(2) }} {{ currency }}
+                {{ price.new }} {{ currency }}
               </v-col>
             </v-btn>
           </v-card-actions>
@@ -111,18 +99,20 @@
 </template>
 
 <script scoped>
-  import { computed } from '@vue/composition-api';
+  import { computed, reactive } from '@vue/composition-api';
   export default {
     props: ['props'],
     setup: ({ props: { ...props } }) => {
       const currency = computed(() => `руб`);
-      const price = computed(() => (Math.round(Math.random() * 1e3) + Math.random() * 1).toFixed(2));
-      // const isLoaded = computed(() => setTimeout(() => true, 5000));
+      const priceOld = computed(() => (Math.round(Math.random() * 1e3) + Math.random() * 1).toFixed(2));
+      const price = reactive({
+        old: priceOld.value,
+        new: computed(() => (priceOld.value - Math.floor(Math.random() * `1e${(priceOld.value.split('.')[0].length - 1)}`)).toFixed(2)),
+      });
 
       return {
         currency,
         price,
-        // isLoaded,
       };
     },
   };
