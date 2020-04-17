@@ -117,7 +117,6 @@
       const setCycle = (value = true) => {
         if (isMouseover.value === value) return;
         isMouseover.value = value;
-        console.log(isMouseover.value);
       };
 
       return {
