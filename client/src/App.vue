@@ -45,6 +45,19 @@
     border-radius: 0.6vw !important;
   }
 
+  .transparent-text {
+    /* font-family: 'Rubik One', sans-serif; */
+    /* font-size: 50px; */
+    /* text-transform: uppercase; */
+    /* background: #000A; */
+    display: table;
+    /* margin: 20px auto; */
+    color: white;
+    /* border-radius: 5px; */
+    mix-blend-mode: multiply;
+    /* padding: 5px 10px; */
+  }
+
   .active {
     animation: activeAnimation ease 1s infinite;
   }

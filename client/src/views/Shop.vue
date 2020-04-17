@@ -37,7 +37,7 @@
       <!-- END Middle Banner Block -->
 
       <!-- BEGIN Main Sales Items Block -->
-      <v-row :wrap='true' align='center' justify='space-between' class='mx-auto'>
+      <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
         <base-item-vertical class='mx-auto my-2' v-for='card in 5' :key='`card${card}`' :props='{ id: card }'/>
       </v-row>
       <!-- END Main Sales Items Block -->
@@ -58,8 +58,8 @@
       <!-- END Middle Banner Block -->
 
       <!-- BEGIN Middle Ads Items Block -->
-      <v-row :wrap='true' align='center' justify='space-between' class='mx-auto'>
-        <base-item-vertical class='mx-auto my-2' v-for='card in 10' :key='`card${card}`' :props='{ id: card }'/>
+      <v-row align='center' justify='center' class='ma-0 mx-auto pa-0'>
+        <base-ads-carousel/>
       </v-row>
       <!-- END Middle Ads Items Block -->
 
@@ -106,7 +106,7 @@
       <!-- END Footer Banner Block -->
 
       <!-- BEGIN Footer Sales Items Block -->
-      <v-row :wrap='true' align='center' justify='space-between' class='mx-auto'>
+      <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
         <base-item-vertical class='mx-auto my-2' v-for='card in 10' :key='`card${card}`' :props='{ id: card }'/>
       </v-row>
       <!-- END Footer Sales Items Block -->
@@ -127,7 +127,7 @@
       <!-- END Footer Banner Block -->
 
       <!-- BEGIN Footer Ads Items Block -->
-      <v-row :wrap='true' align='center' justify='space-between' class='mx-auto'>
+      <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
         <base-item-vertical class='mx-auto my-2' v-for='card in 5' :key='`card${card}`' :props='{ id: card }'/>
       </v-row>
       <!-- END Footer Ads Items Block -->

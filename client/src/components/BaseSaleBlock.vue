@@ -1,5 +1,5 @@
 <template>
-  <v-btn x-large text color='yellow' class='display-1 ma-0 d-flex align-end'>
+  <v-btn x-large block text color='yellow' class='display-1 d-flex align-end justify-end'>
     {{ getPercent }}
     <v-icon large right>mdi-sale</v-icon>
   </v-btn>
