@@ -11,6 +11,20 @@ const routes = [
     // component: Shop,
     component: () => import(/* webpackChunkName: 'shop' */ '@/views/Shop.vue'),
   },
+  {
+    path: '/items/:id',
+    name: 'items',
+    // props: rout => ({ item: rout.query.item }),
+    // component: Items,
+    component: () => import(/* webpackChunkName: 'items' */ '@/views/Items.vue'),
+  },
+  {
+    path: '/items',
+    name: 'items',
+    // props: rout => ({ item: rout.query.item }),
+    // component: Items,
+    component: () => import(/* webpackChunkName: 'items' */ '@/views/Items.vue'),
+  },
   // {
   //   path: '/dashboard',
   //   name: 'dashboard',

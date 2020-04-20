@@ -1,16 +1,19 @@
 <template>
   <v-hover #default='{ hover }'>
     <v-card
-      class='ma-0'
+      class='ma-0 v-card'
       dark
       flat
       max-height='320'
       tile
+      :to='props !== `undefined` ? `/items/${props.id}` : ``'
       width='220'
+      hover
     >
       <v-img
-        :lazy-src='`https://picsum.photos/200/300?random=${props.id}0`'
-        :src='`https://picsum.photos/200/300?random=${props.id}0`'
+        :aspect-ratio='16/9'
+        :lazy-src='`https://picsum.photos/220/320?random=${props.id}0`'
+        :src='`https://picsum.photos/220/320?random=${props.id}0`'
         class='ma-0 mx-auto pa-1'
         gradient='to top, rgba(12,12,12,.1), rgba(12,12,12,.1)'
         height='320'

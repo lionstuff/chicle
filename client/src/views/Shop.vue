@@ -106,8 +106,8 @@
       <!-- END Footer Banner Block -->
 
       <!-- BEGIN Footer Sales Items Block -->
-      <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
-        <base-item-vertical class='mx-auto my-2' v-for='card in 10' :key='`card${card}`' :props='{ id: card }'/>
+      <v-row align='center' justify='center' class='ma-0 mx-auto pa-0'>
+        <base-ads-carousel/>
       </v-row>
       <!-- END Footer Sales Items Block -->
 

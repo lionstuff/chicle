@@ -2,29 +2,31 @@
   <v-hover #default='{ hover }'>
     <!-- <v-col :cols='hover ? 5 : 2' fluid> -->
       <v-app-bar
+        :collapse='!hover'
+        :dense='false'
+        :fade-img-on-scroll='true'
+        :short='true'
+        :tile='false'
+        class='elevation-5 text-uppercase body-2 ma-2'
+        clipped-right
         dark
         fixed
         floating
-        clipped-left
-        :fade-img-on-scroll='true'
-        :short='true'
-        :collapse='!hover'
         scroll-threshold='350'
-        :tile='false'
-        :dense='false'
-        class='elevation-5 text-uppercase body-2 ma-1'
       >
         <template #img>
           <v-img
-            :src='`https://picsum.photos/800/600?random=2`'
-            :lazy-src='`https://picsum.photos/800/600?random=2`'
+            :aspect-ratio='16/9'
+            :lazy-src='`https://picsum.photos/800/600?random=1`'
+            :src='`https://picsum.photos/800/600?random=1`'
+            gradient='to top, rgba(12,12,12,.0), rgba(250,100,100,.4)'
+            min-width='100vw'
             style='object-fit: cover;'
             width='100vw'
-            min-width='100vw'
           />
         </template>
 
-        <!-- <v-app-bar-nav-icon/> -->
+        <v-app-bar-nav-icon/>
 
         <div>{{ hover ? 'Войти' : 'Chicle' }}</div>
 
