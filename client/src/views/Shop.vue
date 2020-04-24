@@ -38,7 +38,7 @@
 
       <!-- BEGIN Main Sales Items Block -->
       <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
-        <base-item-vertical class='mx-auto my-2' v-for='card in 5' :key='`card${card}`' :props='{ id: card }'/>
+        <base-item-vertical class='mx-auto my-2' v-for='card in 5' :key='`card${card}`' :props='getItemProps(card)'/>
       </v-row>
       <!-- END Main Sales Items Block -->
 
@@ -128,7 +128,7 @@
 
       <!-- BEGIN Footer Ads Items Block -->
       <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
-        <base-item-vertical class='mx-auto my-2' v-for='card in 5' :key='`card${card}`' :props='{ id: card }'/>
+        <base-item-vertical class='mx-auto my-2' v-for='card in 5' :key='`card${card}`' :props='getItemProps(card)'/>
       </v-row>
       <!-- END Footer Ads Items Block -->
 
@@ -159,10 +159,14 @@
 </template>
 
 <script scoped>
+  'use strict';
+
+  import { useItems } from '@/composition/useItems.js';
   export default {
     setup() {
-
+      const { getItemProps } = useItems();
       return {
+        getItemProps,
       };
     },
   };

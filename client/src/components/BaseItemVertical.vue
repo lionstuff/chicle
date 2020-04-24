@@ -1,14 +1,14 @@
 <template>
   <v-hover #default='{ hover }'>
     <v-card
-      class='ma-0 v-card'
+      :to='props !== `undefined` ? `/items/${props.id}` : ``'
+      class='ma-0 v-card elevation-2'
       dark
       flat
+      hover
       max-height='320'
       tile
-      :to='props !== `undefined` ? `/items/${props.id}` : ``'
       width='220'
-      hover
     >
       <v-img
         :aspect-ratio='16/9'
@@ -31,7 +31,7 @@
 
         <!-- BEGIN Card Info section -->
         <v-card
-          class='ma-0 mx-auto transparent'
+          class='ma-0 mx-auto v-card transparent'
           flat
           height='220'
           outlined
@@ -39,11 +39,12 @@
           width='100%'
         >
           <v-card-title class='ma-0 mx-auto pa-0 pt-1 d-flex align-center justify-center'>
+            {{ /* props.title */ }}
             Card #{{ props.id }}
           </v-card-title>
 
           <v-sheet
-            class='body-1 ma-2 mx-auto pa-0 v-card v-card--flat v-card__text v-sheet text-content__cover d-flex align-end justify-center'
+            class='body-1 ma-2 mx-auto pa-0 v-card v-card--flat elevation-0 v-card__text text-content__cover d-flex align-end justify-center'
             height='100%'
             max-height='100%'
             max-width='100%'
@@ -55,6 +56,7 @@
               class='mx-auto pa-1 v-card v-card--hover text-content'
               v-if='hover'
             >
+              {{ /* props.description */ }}
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati optio est qui nam, hic, harum exercitationem sunt, fugiat id corporis ullam illo nostrum ad illum. Itaque at amet eligendi qui!
             </v-row>
 
@@ -68,7 +70,7 @@
               <v-col
                 cols='1'
                 class='ma-0 pa-1'
-                v-if='Math.random() > 0.62'
+                v-if='props.hasGift'
               >
                 <v-btn text large icon class='success'>
                   <v-icon color='white'>mdi-gift</v-icon>
@@ -82,7 +84,7 @@
                 justify='end'
                 class='ma-0 pa-0'
               >
-                <base-sale-block :props='{ ...price }'/>
+                <base-sale-block :props='{ ...props.price }'/>
               </v-col>
               <!-- END Sale Block -->
 
@@ -91,12 +93,12 @@
           </v-sheet>
 
           <v-card-actions class='ma-0 mx-auto pa-0'>
-            <v-btn normal block color='primary' clas='d-flex align-center justify-center'>
+            <v-btn normal block color='primary' class='d-flex align-center justify-center' @click.stop='click()'>
               <v-col class='ma-0 pa-0 text--disabled font-weight-thin' style='text-decoration: line-through;'>
-                {{ price.old }} {{ currency }}
+                {{ props.price.old }} {{ props.currency }}
               </v-col>
               <v-col class='ma-0 pa-0'>
-                {{ price.new }} {{ currency }}
+                {{ props.price.new }} {{ props.currency }}
               </v-col>
             </v-btn>
           </v-card-actions>
@@ -109,26 +111,21 @@
 </template>
 
 <script scoped>
-  import { computed, reactive } from '@vue/composition-api';
+  'use strict';
+  import { onMounted } from '@vue/composition-api';
+
   export default {
     props: ['props'],
     setup: ({ props: { ...props } }) => {
-      const currency = computed(() => `руб`);
-      const priceOld = computed(() => (Math.round(Math.random() * 1e3) + Math.random() * 1).toFixed(2));
-      const price = reactive({
-        old: priceOld.value,
-        new: computed(() => (priceOld.value - Math.floor(Math.random() * `1e${(priceOld.value.split('.')[0].length - 1)}`)).toFixed(2)),
-      });
-
+      const click = () => console.log('click..');
       return {
-        currency,
-        price,
+        click,
       };
     },
   };
 </script>
 
-<style lang="css" scoped>
+<style type='text/css' lang='css' scoped>
   .text-content {
     line-height: 1.9em;
     overflow: hidden;

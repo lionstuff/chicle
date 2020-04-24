@@ -41,6 +41,7 @@
 </template>
 
 <script scoped>
+  'use strict';
   export default {
 
   };

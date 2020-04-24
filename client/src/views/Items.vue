@@ -39,23 +39,11 @@
             class='pa-0 v-card v-card--flat'
             width='100%'
           >
-            <v-card-title v-if='tabItemCard.type !== `map` && tabItemCard.type !== `user`'>{{ tabItemCard.caption }}</v-card-title>
+            <v-card-title v-if='tabItemCard.type !== `map` && tabItemCard.type !== `user`'>
+              {{ getItemProps($route.params.id).description.title }}
+            </v-card-title>
             <v-card-text v-if='tabItemCard.type !== `map` && tabItemCard.type !== `user`'>
-              <p>
-                Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
-              </p>
-
-              <p>
-                Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
-                Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non nisl sit amet velit hendrerit rutrum.
-              </p>
-
-              <p class='mb-0'>
-                Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
-                Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non nisl sit amet velit hendrerit rutrum.
-                Phasellus dolor. Fusce neque. Fusce fermentum odio nec arcu. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Phasellus blandit leo ut odio.
-              </p>
-
+              {{ getItemProps($route.params.id).description.body }}
             </v-card-text>
 
             <!-- BEGIN Maps Block -->
@@ -63,15 +51,16 @@
               v-if='tabItemCard.type === `map`'
               class='v-card v-card--flat'
               :style='{ ...getStyle }'
-              :props='{ coords: getCoords /* item.coords */ }'
+              :props='{ coords: getItemProps($route.params.id).coords }'
             />
             <!-- END Maps Block -->
 
             <!-- BEGIN User Block -->
+              <!-- :props='{ id: $route.params.id }' -->
             <base-item-vertical
               v-if='tabItemCard.type === `user`'
               class='ma-4 pa-0 mb-0'
-              :props='{ id: $route.params.id }'
+              :props='getItemProps($route.params.id)'
             />
             <!-- END User Block -->
           </v-card>
@@ -83,12 +72,12 @@
 </template>
 
 <script scoped>
-  import { ref, computed, onBeforeMount } from '@vue/composition-api';
+  'use strict';
+  import { ref, computed, onMounted } from '@vue/composition-api';
+  import { useItems } from '@/composition/useItems.js';
   export default {
-    // props: ['props'],
+    props: ['props'],
     setup: (props, context/*{ props: { ...props }}*/) => {
-      const getCoords = computed(() => [Math.random() * 1e2, Math.random() * 1e2]);
-
       const getStyle = computed(() => {
         if (context.parent.$vuetify.breakpoint.smAndDown) {
           return {
@@ -103,21 +92,17 @@
         }
       });
 
-      onBeforeMount(() => {
-        console.log('onBeforeMount:', context.attrs.item);
-      });
-
       const tabs = ref([
-          { icon: `mdi-information`, caption: `Описание` },
-          { icon: `mdi-comment`, caption: `Комментарии` },
-          { icon: `mdi-map-marker`, caption: `На карте`, type: 'map' },
-          { icon: `mdi-account`, caption: `Пользователь`, type: 'user' }
-        ]);
+        { icon: `mdi-information`, caption: `Описание` },
+        { icon: `mdi-comment`, caption: `Комментарии` },
+        { icon: `mdi-map-marker`, caption: `На карте`, type: 'map' },
+        { icon: `mdi-account`, caption: `Пользователь`, type: 'user' }
+      ]);
 
       return {
-        getCoords,
         getStyle,
         tabs,
+        ...useItems(),
       };
     },
   };

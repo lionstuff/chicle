@@ -7,7 +7,7 @@
     <!-- End Toolbar -->
 
     <v-content>
-      <v-fade-transition mode='out-in'>
+      <v-fade-transition>
         <keep-alive>
           <router-view/>
         </keep-alive>

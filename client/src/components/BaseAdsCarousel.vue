@@ -14,17 +14,20 @@
       :key='`adsItem${adsItem}`'
     >
       <v-row :wrap='true' align='center' justify='space-between' class='ma-0 mx-auto pa-0'>
-       <base-item-vertical v-for='card in 10 /* [TODO] Based on breakpoints */' :key='`card${card}`' class='mx-auto my-2' :props='{ id: `${adsItem}${card}` }'/>
+       <base-item-vertical v-for='card in 10 /* [TODO] Based on breakpoints */' :key='`card${card}`' class='mx-auto my-2' :props='getItemProps(`${adsItem}${card}0`)'/>
       </v-row>
     </v-carousel-item>
   </v-carousel>
 </template>
 
 <script scoped>
+  'use strict';
+  import { useItems } from '@/composition/useItems.js';
   export default {
-    setup: () => {
+    props: ['props'],
+    setup: (props) => {
       return {
-        //
+        ...useItems(),
       };
     },
   };

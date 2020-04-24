@@ -42,11 +42,9 @@
           >
             <v-sheet
               :height='$vuetify.breakpoint.smAndDown ? `75vh` : `80vh` /* [TODO] Based on breakpoints */'
-              class='ma-0 pa-0'
-              flat
+              class='ma-0 pa-0 v-card--flat v-card__tile'
               max-width='100%'
               min-width='100%'
-              tile
             >
               <v-img
                 :aspect-ratio='16/9'
@@ -63,7 +61,7 @@
                   justify='center'
                 >
                   <v-card-title
-                    :class='`${colors[i]} display-1 transparent-text text-uppercase`'
+                    :class='`${colors[i]} display-1 transparent-text text-uppercase elevation-5`'
                     style='border: 5px rgba(0,0,0,.8) solid; border-radius: 0.6vw; background-image: linear-gradient(to right, rgba(255,255,255,.4), rgba(255,255,255,.0));'
                   >
                     Заголовок {{ i }}
@@ -104,6 +102,7 @@
 </template>
 
 <script scoped>
+  'use strict';
   import { ref, computed } from '@vue/composition-api';
   export default {
     setup: () => {
