@@ -26,7 +26,6 @@ export const useItems = () => {
   });
 
   const getItemProps = (id) => {
-
     if (!Object.keys(description.value).length || description.value.id !== id) {
       getDescription(id);
     }
