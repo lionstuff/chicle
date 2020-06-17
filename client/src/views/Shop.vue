@@ -1,16 +1,20 @@
 <template>
-  <v-container grid-list-lg class='mx-auto'>
+  <v-container
+    :grid-list-lg='breakpoints.large'
+    :grid-list-sm='breakpoints.small'
+    class='mx-auto my-auto'
+  >
 
     <!-- BEGIN Head Section -->
 
       <!-- BEGIN Head Premium Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <base-carousel/>
       </v-row>
       <!-- END Head Premium Block -->
 
       <!-- BEGIN Information Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <actual-info/>
       </v-row>
       <!-- END Information Block -->
@@ -22,7 +26,7 @@
     <!-- BEGIN Main Section -->
 
       <!-- BEGIN Middle Banner Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <v-card class='pa-2' width='100%' height='200'>
           <v-card-title primary-title>
             <h3 class='display-1'>Заголовок</h3>
@@ -43,7 +47,7 @@
       <!-- END Main Sales Items Block -->
 
       <!-- BEGIN Middle Banner Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <v-card class='pa-2' width='100%' height='200'>
           <v-card-title primary-title>
             <h3 class='display-1'>Заголовок</h3>
@@ -70,7 +74,7 @@
     <!-- BEGIN Footer Section -->
 
       <!-- BEGIN Footer Banner Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <v-card class='pa-2' width='100%' height='200'>
           <v-card-title primary-title>
             <h3 class='display-1'>Заголовок</h3>
@@ -85,13 +89,13 @@
       <!-- END Footer Banner Block -->
 
       <!-- BEGIN Footer Premium Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <base-carousel/>
       </v-row>
       <!-- END Footer Premium Block -->
 
       <!-- BEGIN Footer Banner Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <v-card class='pa-2' width='100%' height='200'>
           <v-card-title primary-title>
             <h3 class='display-1'>Заголовок</h3>
@@ -112,7 +116,7 @@
       <!-- END Footer Sales Items Block -->
 
       <!-- BEGIN Footer Banner Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <v-card class='pa-2' width='100%' height='200'>
           <v-card-title primary-title>
             <h3 class='display-1'>Заголовок</h3>
@@ -133,7 +137,7 @@
       <!-- END Footer Ads Items Block -->
 
       <!-- BEGIN Footer Banner Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <v-card class='pa-2' width='100%' height='200'>
           <v-card-title primary-title>
             <h3 class='display-1'>Заголовок</h3>
@@ -148,7 +152,7 @@
       <!-- END Footer Banner Block -->
 
       <!-- BEGIN Footer Premium Block -->
-      <v-row class='my-5 mx-auto' align='center' justify='center'>
+      <v-row :class='[breakpoints.small ? `my-2` : `my-5`, `mx-auto`]' align='start' justify='center'>
         <base-carousel/>
       </v-row>
       <!-- END Footer Premium Block -->
@@ -162,11 +166,13 @@
   'use strict';
 
   import { useItems } from '@/composition/useItems.js';
+  import { useBreakpoints } from '@/composition/useBreakpoints.js';
   export default {
-    setup() {
+    setup(props, context) {
       const { getItemProps } = useItems();
       return {
         getItemProps,
+        ...useBreakpoints(context),
       };
     },
   };

@@ -26,7 +26,7 @@ module.exports = {
     // loaderOptions: {}
   },
   productionSourceMap: false,
-  runtimeCompiler: true,
+  runtimeCompiler: false,
   // performance: true,
   lintOnSave: false,
   parallel: true,

@@ -18,7 +18,7 @@
 <script scoped>
   'use strict';
   // import L from 'leaflet';
-  import { ref, watchEffect, onMounted } from '@vue/composition-api';
+  // import { ref, watchEffect, onMounted } from '@vue/composition-api';
 
   export default {
     props: ['props'],

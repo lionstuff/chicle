@@ -1,43 +1,34 @@
 <template>
-  <v-container fluid fill-height class='mx-auto'>
-    <v-row align='center' justify='center'>
-      <v-col cols='8' xs12 sm8 md4>
-        <v-card class='elevation-12'>
-          <v-toolbar dark color='primary'>
-            <v-toolbar-title>Войти</v-toolbar-title>
-  <!--
-            <v-spacer/>
-            <v-tooltip bottom>
-              <template #activator='{ on }'>
-                <v-btn
-                  v-on='on'
-                  icon
-                >
-                  <v-icon>mdi-xml</v-icon>
-                </v-btn>
-              </template>
-              <span>Source</span>
-            </v-tooltip>
-  -->
-          </v-toolbar>
+  <v-row align='center' justify='center'>
+    <v-col xs='11' sm='10' md='8' lg='5' xl='4'>
+      <v-card class='v-card elevation-5'>
+        <v-toolbar dark dense flat fluid class='primary'>
+          <v-toolbar-title>Войти</v-toolbar-title>
+        </v-toolbar>
+        <v-form
+          @submit.prevent='submit'
+        >
           <v-card-text>
-            <v-form>
-              <v-text-field prepend-icon='mdi-account' name='login' label='Login' type='text'></v-text-field>
-              <v-text-field prepend-icon='mdi-lock' name='password' label='Password' id='password' type='password'></v-text-field>
-            </v-form>
+            <v-text-field prepend-icon='mdi-at' name='login' label='Логин' type='text'/>
+            <v-text-field prepend-icon='mdi-lock' name='password' label='Пароль' id='password' type='password'/>
           </v-card-text>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color='primary'>Login</v-btn>
+            <v-spacer/>
+            <v-btn color='primary'>Войти</v-btn>
           </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        </v-form>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script scoped>
   export default {
+    setup: () => {
+      return {
+        //
+      };
+    },
     data: () => ({
 
     }),

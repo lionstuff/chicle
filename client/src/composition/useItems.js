@@ -2,21 +2,24 @@
 
 import { ref, computed, reactive } from '@vue/composition-api';
 
+import apiVersions from '@/api';
+const api = apiVersions['v0.1'];
+
 export const useItems = () => {
-  const coords = computed(() => [Math.random() * 1e2, Math.random() * 1e2]);
+  const comments = ref({});
+  const coords = computed(() => [ `5${Math.round(Math.random() * 1e1)}`, `4${Math.round(Math.random() * 1e1)}`]);
   const currency = computed(() => `руб`);
+  const info = ref({});
 
-  const description = ref({});
-
-  const getDescription = (id) => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id <= 100 ? id : 100}`)
-      .then(res => res.json())
-      .then(data => {
-        description.value = data;
-      });
+  const getComments = async (id) => { // v2
+    const responce = await api.get(`/posts/${id <= 100 ? id : 100}/comments`);
+    comments.value = responce.data;
   };
 
-  const hasGift = computed(() => Math.random() > 0.62);
+  const getInfo = async (id) => { // v2
+    const responce = await api.get(`/posts/${id <= 100 ? id : 100}`);
+    info.value = responce.data;
+  };
 
   const priceOld = computed(() => (Math.round(Math.random() * 1e3) + Math.random() * 1).toFixed(2));
 
@@ -25,18 +28,23 @@ export const useItems = () => {
     new: computed(() => (priceOld.value - Math.floor(Math.random() * `1e${(priceOld.value.split('.')[0].length - 1)}`)).toFixed(2)),
   });
 
-  const getItemProps = (id) => {
+  const hasGift = computed(() => Math.random() > 0.62);
+  const hasSale = computed(() => price.new !== price.old);
 
-    if (!Object.keys(description.value).length || description.value.id !== id) {
-      getDescription(id);
+  const getItemProps = (id) => {
+    if (!Object.keys(info.value).length && info.value.id !== id) {
+      getInfo(id);
+      getComments(id);
     }
 
     return {
+      comments: comments.value,
       coords: coords.value,
       currency: currency.value,
-      description: description.value,
       hasGift: hasGift.value,
+      hasSale: hasSale.value,
       id,
+      info: info.value,
       price,
     };
   };

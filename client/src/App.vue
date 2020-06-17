@@ -1,13 +1,13 @@
 <template>
-  <v-app>
+  <v-app class='fluid ma-0 pa-0'>
     <!-- Begin Toolbar -->
-    <v-row class='pa-1 ma-0' align='start' justify='start'>
-      <base-toolbar/>
+    <v-row class='ma-0 pa-0' align='start' justify='start'>
+      <base-toolbar class='pink ma-0 pa-0' style='opacity: 0.95'/>
     </v-row>
     <!-- End Toolbar -->
 
-    <v-content>
-      <v-fade-transition>
+    <v-content class='fluid transparent ma-0'>
+      <v-fade-transition :appear='true' mode='out-in'>
         <keep-alive>
           <router-view/>
         </keep-alive>
@@ -19,7 +19,7 @@
 <script>
   export default {
     name: 'App',
-    setup() {
+    setup: () => {
       //
       return {
         //
@@ -41,6 +41,9 @@
     cursor: default !important;
   }
 
+  .theme--dark.v-application {
+    background: transparent;
+  }
   .v-card:not(.v-sheet--tile):not(.v-card--shaped), .v-card {
     border-radius: 0.6vw !important;
   }

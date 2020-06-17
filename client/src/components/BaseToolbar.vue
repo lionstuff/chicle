@@ -1,64 +1,63 @@
 <template>
   <v-hover #default='{ hover }'>
-    <!-- <v-col :cols='hover ? 5 : 2' fluid> -->
-      <v-app-bar
-        :collapse='!hover'
-        :dense='false'
-        :fade-img-on-scroll='true'
-        :short='true'
-        :tile='false'
-        class='elevation-5 text-uppercase body-2 ma-2'
-        clipped-right
-        dark
-        fixed
-        floating
-        scroll-threshold='350'
-      >
-        <template #img>
-          <v-img
-            :aspect-ratio='16/9'
-            :lazy-src='`https://picsum.photos/800/600?random=1`'
-            :src='`https://picsum.photos/800/600?random=1`'
-            gradient='to top, rgba(12,12,12,.0), rgba(250,100,100,.4)'
-            min-width='100vw'
-            style='object-fit: cover;'
-            width='100vw'
-          />
-        </template>
+    <v-app-bar
+      :collapse='!hover'
+      :dense='false'
+      :fade-img-on-scroll='true'
+      :short='true'
+      :tile='false'
+      class='elevation-5 text-uppercase body-2 ma-2 pink'
+      clipped-left
+      dark
+      fixed
+      floating
+      fluid
+      scroll-threshold='350'
+      style='opacity: 0.85;'
+    >
+<!--       <template #img>
+        <v-img
+          :aspect-ratio='16/9'
+          :lazy-src='`https://picsum.photos/800/600?random=1`'
+          :src='`https://picsum.photos/800/600?random=1`'
+          gradient='to top, rgba(12,12,12,.0), rgba(250,50,50,.6)'
+          min-width='100vw'
+          style='object-fit: cover; filter: blur(10px);'
+          width='100vw'
+        />
+      </template> -->
 
-        <v-app-bar-nav-icon/>
+      <v-app-bar-nav-icon/>
 
-        <div>{{ hover ? 'Войти' : 'Chicle' }}</div>
+      <v-slide-x-reverse-transition mode='in-out'>
+        <div v-if='!hover'>Chicle</div>
+      </v-slide-x-reverse-transition>
 
-        <v-slide-x-reverse-transition>
-          <v-btn icon v-if='hover' @click='navigate(`login`)'>
-            <v-icon>mdi-login</v-icon>
-          </v-btn>
-        </v-slide-x-reverse-transition>
+      <v-slide-x-reverse-transition mode='in-out'>
+        <v-btn text v-if='hover' @click='navigate(`login`)'>
+          {{ hover ? 'Войти' : 'Chicle' }}
+          <v-icon right>mdi-login</v-icon>
+        </v-btn>
+      </v-slide-x-reverse-transition>
 
-        <!-- <v-spacer v-if='hover'/> -->
+      <v-slide-x-reverse-transition mode='in-out'>
+        <v-btn text v-if='hover' @click='navigate(`shop`)'>
+          Магазин
+          <v-icon right>mdi-cart</v-icon>
+        </v-btn>
+      </v-slide-x-reverse-transition>
 
-        <v-slide-x-reverse-transition>
-          <div v-if='hover'>Магазин</div>
-        </v-slide-x-reverse-transition>
-        <v-slide-x-reverse-transition>
-          <v-btn icon v-if='hover' @click='navigate(`shop`)'>
-            <v-icon>mdi-cart</v-icon>
-          </v-btn>
-        </v-slide-x-reverse-transition>
+      <v-slide-x-reverse-transition mode='in-out'>
+        <v-text-field
+          hide-details
+          placeholder='Поиск'
+          prepend-icon='mdi-magnify'
+          single-line
+          v-if='hover'
+        />
+      </v-slide-x-reverse-transition>
 
-        <v-slide-x-reverse-transition>
-          <v-text-field
-            hide-details
-            placeholder='Поиск'
-            prepend-icon='mdi-magnify'
-            single-line
-            v-if='hover'
-          />
-        </v-slide-x-reverse-transition>
-
-      </v-app-bar>
-    <!-- </v-col> -->
+    </v-app-bar>
   </v-hover>
 </template>
 

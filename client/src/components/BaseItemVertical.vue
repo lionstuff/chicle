@@ -25,7 +25,7 @@
         transition='fade-transition'
         width='220'
       >
-        <template #placeholder transition='fade-transition'>
+        <template #placeholder>
           <base-image-placeholder/>
         </template>
 
@@ -83,6 +83,7 @@
                 align='end'
                 justify='end'
                 class='ma-0 pa-0'
+                v-if='props.hasSale'
               >
                 <base-sale-block :props='{ ...props.price }'/>
               </v-col>
@@ -94,7 +95,7 @@
 
           <v-card-actions class='ma-0 mx-auto pa-0'>
             <v-btn normal block color='primary' class='d-flex align-center justify-center' @click.stop='click()'>
-              <v-col class='ma-0 pa-0 text--disabled font-weight-thin' style='text-decoration: line-through;'>
+              <v-col v-if='props.hasSale' class='ma-0 pa-0 text--disabled font-weight-thin' style='text-decoration: line-through;'>
                 {{ props.price.old }} {{ props.currency }}
               </v-col>
               <v-col class='ma-0 pa-0'>

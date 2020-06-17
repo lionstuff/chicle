@@ -2,15 +2,15 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import routes from './routes';
 
-/**
- * @name [TODO]
- * @description Подготовка роутов на основе имён файлов из дериктории @/views
- *              для автоматического построения и подключения путей для навигации
- */
+// /**
+//  * @name [TODO]
+//  * @description Подготовка роутов на основе имён файлов из дериктории @/views
+//  *              для автоматического построения и подключения путей для навигации
+//  */
 
 // const dir = '@/views';
-// const requireRoute = require.context(/* dir */ '@/views', true, /\.vue$/);
-// // const routes = {};
+// const requireRoute = require.context('@/views', true, /\.vue$/);
+// const routes = [];
 
 // const routeProps = (rout) => {
 //   try {
@@ -27,22 +27,35 @@ import routes from './routes';
 //     .replace(/^\.\//, '')
 //     .replace(/\.\w+$/, '')
 //     .toLowerCase();
+
 //   const targetPath = fileName.replace(/^\.\//, `${dir}/`);
-//   const route = {
-//     path: `/${routeName}`,
-//     name: routeName,
-//     props: (rout) => ({ ...routeProps(rout)[routeName] }),
-//   //   component: () => import(/* webpackChunkName: routeName */ targetPath),
-//   };
-//   // routes.push(route);
-//   console.log('fileName:', fileName, 'routeName:', routeName, 'targetPath:', targetPath, 'route:', route.props);
+
+//   if (!routes[routeName]) {
+//     // routes[routeName] = requireRoute(fileName).default;
+//     const route = {
+//       path: routeName.toLowerCase() === 'default' ? '' : `/${routeName}`,
+//       name: routeName,
+//       // props: rout => ({ ...routeProps(rout)[routeName] }),
+//       component: () => (import(/* webpackChunkName: `${routeName}` */ targetPath)),
+//       // component: () => (Promise.resolve(`./src/views/${fileName}`)),
+//     };
+
+//     routes[routeName] = route;
+//   }
 // });
+
+// if (process.env.NODE_ENV !== 'production') {
+//   console.log('[routes] ./router/index.js:', routes);
+// }
+
+
 
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
+  // fallback: true,
+  mode: 'history',
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -67,5 +80,7 @@ router.beforeEach((to, from, next) => {
     next(); // [OK]
   }
 });
+
+// console.log(router);
 
 export default router;
